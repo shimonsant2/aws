@@ -18,7 +18,7 @@ for user in iam.list_users()['Users']:
     )
     )
 
-# the user boto3 using
+# get boto3 user
 print(iam.get_user())
 
 # list all users permissions by policies
