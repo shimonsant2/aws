@@ -18,6 +18,7 @@ for user in iam.list_users()['Users']:
     )
     )
 
+
 # get boto3 user
 print(iam.get_user())
 
@@ -37,3 +38,5 @@ for user_detail in iam.get_account_authorization_details(Filter=['User'])['UserD
             policyarn
         )
     )
+
+
