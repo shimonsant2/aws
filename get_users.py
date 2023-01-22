@@ -8,3 +8,5 @@ paginator = iam.get_paginator('list_users')
 for response in paginator.paginate():
     assert isinstance(response, object)
     print(response)
+
+print("\nusers")
