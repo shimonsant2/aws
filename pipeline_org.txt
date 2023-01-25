@@ -1,19 +1,31 @@
 pipeline {
-    agent any
+    agent {
+        node {
+            label 'my_local_server'
+            customWorkspace '/projects/'
+        }
+    }
     stages {
+        stage('Checkout project') {
+            steps {
+                script {
+                    git branch: "master",
+                        credentialsId: 'my-credentials',
+                        url: 'https://user@github.org/myproject/sample-repo.git'
+                }
+            }
+        }
         stage('Installing packages') {
             steps {
                 script {
-                    sh 'pwd'
-                    sh 'ls -l'
-                    sh 'pip3 install -r requirements.txt'
+                    sh 'pip install -r requirements.txt'
                 }
             }
         }
         stage('Static Code Checking') {
             steps {
                 script {
-                    sh "find . -name '*.py' | xargs pylint -f parseable | tee pylint.log"
+                    sh 'find . -name \\*.py | xargs pylint -f parseable | tee pylint.log'
                     recordIssues(
                         tool: pyLint(pattern: 'pylint.log'),
                         unstableTotalHigh: 100,
@@ -21,30 +33,12 @@ pipeline {
                 }
             }
         }
-        stage ('for the fix branch') {
-          when {
-            branch "fix-*"
-          }
-          steps {
-             echo 'this only run for the fixes'
-            sh 'pwd'
-           }
-        }
-        stage ('for the PR branch') {
-          when {
-            branch "PR-*"
-          }
-          steps {
-             echo 'this only run for the PRs'
-             sh 'pwd'
-           }
-        }
         stage('Running Unit tests') {
             steps {
                 script {
-                    sh 'python3 -m pytest --junitxml=pyunit.xml --cov=. --cov-report xml'
+                    sh 'pytest --with-xunit --xunit-file=pyunit.xml --cover-xml --cover-xml-file=cov.xml tests/*.py || true'
                     step([$class: 'CoberturaPublisher',
-                        coberturaReportFile: "coverage.xml",
+                        coberturaReportFile: "cov.xml",
                         onlyStable: false,
                         failNoReports: true,
                         failUnhealthy: false,
@@ -53,10 +47,10 @@ pipeline {
                         autoUpdateStability: true,
                         zoomCoverageChart: true,
                         maxNumberOfBuilds: 10,
-                        lineCoverageTargets: '5, 5, 5',
-                        conditionalCoverageTargets: '5, 5, 5',
-                        classCoverageTargets: '5, 5, 5',
-                        fileCoverageTargets: '5, 5, 5',
+                        lineCoverageTargets: '80, 80, 80',
+                        conditionalCoverageTargets: '80, 80, 80',
+                        classCoverageTargets: '80, 80, 80',
+                        fileCoverageTargets: '80, 80, 80',
                     ])
                     junit "pyunit.xml"
                 }
