@@ -13,7 +13,7 @@ pipeline {
         stage('Static Code Checking') {
             steps {
                 script {
-                    sh "sudo find . -name '*.py' | xargs pylint --output-format=parseable --rcfile=/home/ec2-user/pylintrc | tee pylint.log"
+                    sh "sudo find . -name '*.py' | xargs pylint --output-format=parseable --rcfile=pylintrc | tee pylint.log"
                     recordIssues(
                         tool: pyLint(pattern: 'pylint.log'),
                         unstableTotalHigh: 100,
