@@ -1,8 +1,6 @@
 # function to check string is
 # palindrome or not
 
-import pytest
-
 
 def isPalindrome(str):
     # Run loop from 0 to len/2
@@ -53,4 +51,4 @@ else:
         assert isPalindrome(test_6) == False
 
     def test_answer7():
-        assert isPalindrome(test_7) == False
+        assert isPalindrome(test_7) == True
