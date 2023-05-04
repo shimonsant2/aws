@@ -22,6 +22,7 @@ test_3 = 'aaabbbcccbbbaaa'
 test_4 = 'ttttsfsfsfsfsfsfsfsfsttttdddJenkinkurlGFIeXXX'
 test_5 = 'ddd91ddd'
 test_6 = 'ddd91ddd333666999'
+test_7 = 'aaabaaa'
 
 if ans:
     print("Yes")
@@ -50,3 +51,6 @@ else:
 
     def test_answer6():
         assert isPalindrome(test_6) == False
+
+    def test_answer7():
+        assert isPalindrome(test_7) == False
