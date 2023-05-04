@@ -15,7 +15,7 @@ ans = isPalindrome(s)
 test_1 = '1221'
 test_2 = '1221221'
 test_3 = 'aaabbbcccbbbaaa'
-test_4 = 'ttttsfsfsfsfsfsfsfsfstttt'
+test_4 = 'ttttsfsfsfsfsfsfsfsfsttttddd'
 test_5 = 'ddd91ddd'
 
 if ans:
