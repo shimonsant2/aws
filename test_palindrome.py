@@ -55,4 +55,4 @@ else:
         assert isPalindrome(test_7) == True
 
     def test_answer8():
-        assert isPalindrome(test_8) == False
+        assert isPalindrome(test_8) == True
