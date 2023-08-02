@@ -25,6 +25,7 @@ def test_answer4():
 def test_answer5():
     assert func(44) == 45
 
+
 def test_answer6():
     assert func(44) == 45
 
@@ -36,5 +37,10 @@ def test_answer7():
 def test_answer8():
     assert func(44) == 45
 
+
 def test_answer9():
-    assert func(44) == 44
+    assert func(44) == 45
+
+
+def test_answer10():
+    assert func(44) == 45
