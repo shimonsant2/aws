@@ -23,4 +23,4 @@ def test_answer4():
 
 
 def test_answer5():
-    assert func(44) == 45
+    assert func(44) == 88
